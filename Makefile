@@ -4,8 +4,11 @@ CC = nasm
 SRC_DIR = src
 OBJ_DIR = .obj
 INCLUDE_DIR = include
-SRC = ft_bzero.s
+SRC =	ft_bzero.s ft_strcat.s\
+		ft_strlen.s ft_memcpy.s\
+		ft_memset.s
 OBJ = $(SRC:%.s=$(OBJ_DIR)/%.o)
+FORMAT = elf64
 
 .PHONY: all clean fclean re
 
@@ -15,18 +18,18 @@ $(OBJ_DIR):
 	mkdir $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.s | $(OBJ_DIR)
-	$(CC) -f elf64 -o $@ $<
+	$(CC) -f $(FORMAT) -o $@ $<
 
 $(NAME_TEST): main.c $(NAME)
-	gcc -I $(INCLUDE_DIR) -o $@ $< -L . -lft
+	clang -I $(INCLUDE_DIR) -o $@ $< -L . -lft
 
 $(NAME): $(OBJ)
-	ar rc $@ $<
+	ar rc $@ $(OBJ)
 
 clean:
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(NAME_TEST)
 
 re: fclean all
