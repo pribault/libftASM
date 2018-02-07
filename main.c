@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 16:20:27 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/07 18:16:00 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/07 20:59:06 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	test_ft_bzero(void)
 	printf("\033[0m\nbzero !\n");
 	memdump(&a, sizeof(a));
 
-	printf("\033[1m\n______________\n\n");
+	printf("\033[0m\033[1m\n______________\n\n");
 }
 
 void	test_ft_strlen(void)
@@ -66,7 +66,7 @@ void	test_ft_strlen(void)
 	printf("\033[0mft_strlen(%s)=%lu\n", c, ft_strlen(c));
 	printf("\033[0mft_strlen(%s)=%lu\n", d, ft_strlen(d));
 
-	printf("\033[1m\n______________\n\n");
+	printf("\033[0m\033[1m\n______________\n\n");
 }
 
 void	test_ft_memcpy(void)
@@ -92,7 +92,7 @@ void	test_ft_memcpy(void)
 	printf("\033[0m\033[4m\narray b:\n");
 	memdump(&b, sizeof(b));
 
-	printf("\033[1m\n______________\n\n");
+	printf("\033[0m\033[1m\n______________\n\n");
 }
 
 void	test_ft_strcat(void)
@@ -101,7 +101,25 @@ void	test_ft_strcat(void)
 
 	printf("\033[0mft_strcat=%p\n", ft_strcat(NULL, NULL));
 
-	printf("\033[1m\n______________\n\n");
+	printf("\033[0m\033[1m\n______________\n\n");
+}
+
+void	test_ft_memset(void)
+{
+	char	a[127];
+	int		c = 42;
+
+	printf("\033[0m\033[1m___ft_memset___\n\n");
+
+	memset(&a, 0, sizeof(a));
+	printf("\033[0m\033[4marray a:\n");
+	memdump(&a, sizeof(a));
+	printf("\033[0mft_memset !\n");
+	printf("c=%d s%p p=%p\n", c, &a, ft_memset(&a, c, sizeof(a)));
+	printf("\033[0m\033[4marray a:\n");
+	memdump(&a, sizeof(a));
+
+	printf("\033[0m\033[1m\n______________\n\n");
 }
 
 int		main(int argc, char **argv)
@@ -112,6 +130,7 @@ int		main(int argc, char **argv)
 		test_ft_strlen();
 		test_ft_memcpy();
 		test_ft_strcat();
+		test_ft_memset();
 		return (0);
 	}
 	for (int i = 1; i < argc; i++)
@@ -124,6 +143,8 @@ int		main(int argc, char **argv)
 			test_ft_memcpy();
 		else if (!strcmp(argv[i], "ft_strcat"))
 			test_ft_strcat();
+		else if (!strcmp(argv[i], "ft_memset"))
+			test_ft_memset();
 		else
 			printf("unknown function %s\n", argv[i]);
 	}
