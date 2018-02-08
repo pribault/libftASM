@@ -8,12 +8,7 @@ ft_memcpy:
 
 _start:
 
-	;	push registers that will be used
-
-	push	rdi
-	push	rsi
-	push	rcx
-	push	rdx
+	mov		rbx, rdi
 
 _div:
 
@@ -43,12 +38,5 @@ _copy_8:
 
 _end:
 
-	;	pop all registers
-
-	pop		rdx
-	pop		rcx
-	pop		rsi
-	pop		rdi
-
-	mov		rax, rdi
+	mov		rax, rbx
 	ret

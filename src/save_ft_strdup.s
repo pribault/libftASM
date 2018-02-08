@@ -10,6 +10,12 @@ global ft_strdup
 
 ft_strdup:
 
+	;	pushs
+
+	push	rdi
+	push	rsi
+	push	rdx
+
 _start:
 
 	;	check the string
@@ -18,12 +24,10 @@ _start:
 	je		_end_null
 
 	;	get the string len
-
-	mov		rbx, rdi
 	
 	call	ft_strlen
 
-	push	rbx
+	push	rdi
 	mov		rdi, rax
 	push	rdi
 	call	malloc
@@ -31,7 +35,7 @@ _start:
 	;	check malloc return
 
 	cmp		rax, 0
-	je		_end_null
+	je		_end
 
 	;	ft_memcpy
 
@@ -43,10 +47,21 @@ _start:
 
 _end:
 
+	;	pops
+
+	pop		rdx
+	pop		rsi
+	pop		rdi
+
 	ret
 
 _end_null:
 
-	mov		rax, 0
+	;	pops
 
+	pop		rdx
+	pop		rsi
+	pop		rdi
+
+	mov		rax, 0
 	ret

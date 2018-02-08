@@ -1,3 +1,5 @@
+%define UINT64_MAX	0xffffffffffffffff
+
 section .text
 
 global ft_strlen
@@ -6,52 +8,32 @@ global ft_strlen
 
 ft_strlen:
 
-	;	if null return 0
+	;	check pointer
 
 	cmp		rdi, 0
 	je		_null
 
-	;	pushs
+	;	assignations
 
-	push	rdi
-	push	rsi
-	push	rcx
-
-	;	assign to rcx uint64_t max value
-
-	mov		rcx, 0xffffffffffffffff
-
-	;	assign to al '\0' value
-
+	mov		rcx, UINT64_MAX
 	mov		al, 0
-
-	;	clear flag
-
-	cld
 
 	;	iterate
 
+	cld
 	repne	scasb
 
-	;	substract 1 to get the address of the last character and not \0
+	;	compute final value
 
-	sub		rdi, 1
+	mov		rax, rcx
+	not		rax
+	dec		rax
 
-	;	move to register that will be returned the final value
-
-	mov		rax, rdi
-
-	;	pops
-
-	pop		rcx
-	pop		rsi
-	pop		rdi
-
-	;	return the difference between end and start string pointer
-
-	sub		rax, rdi
 	ret
 
 _null:
+
+	;	if null return 0
+
 	mov	rax, 0
 	ret

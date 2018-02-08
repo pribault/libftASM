@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 16:20:27 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/08 10:31:51 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/08 18:37:13 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/mman.h>
+#include <stdlib.h>
 
 void	test(long a)
 {
@@ -95,15 +96,6 @@ void	test_ft_memcpy(void)
 	printf("\033[0m\033[1m\n______________\n\n");
 }
 
-void	test_ft_strcat(void)
-{
-	printf("\033[0m\033[1m___ft_strcat___\n\n");
-
-	printf("\033[0mft_strcat=%p\n", ft_strcat(NULL, NULL));
-
-	printf("\033[0m\033[1m\n______________\n\n");
-}
-
 void	test_ft_memset(void)
 {
 	char	a[127];
@@ -129,8 +121,23 @@ void	test_ft_strdup(void)
 
 	printf("\033[0m\033[1m___ft_strdup___\n\n");
 
-	printf("ft_strdup(%s)=%s\n", a, ft_strdup(a));
-	printf("ft_strdup(%s)=%s\n", b, ft_strdup(b));
+	printf("ft_strdup(\"%s\")=\"%s\"\n", a, ft_strdup(a));
+	printf("ft_strdup(\"%s\")=\"%s\"\n", b, ft_strdup(b));
+
+	printf("\033[0m\033[1m\n______________\n\n");
+}
+
+void	test_ft_strcat(void)
+{
+	char	*a = malloc(256);
+	char	*save_a;
+	char	*b = "concatenated :D";
+
+	strcpy(a, "Hello I am ");
+	save_a = ft_strdup(a);
+	printf("\033[0m\033[1m___ft_strcat___\n\n");
+
+	printf("ft_strcat(\"%s\", \"%s\")=\"%s\"\n", save_a, b, ft_strcat(a, b));
 
 	printf("\033[0m\033[1m\n______________\n\n");
 }

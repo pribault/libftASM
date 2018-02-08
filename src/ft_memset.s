@@ -6,14 +6,6 @@ global ft_memset
 
 ft_memset:
 
-	;	pushs
-
-	push	rdi
-	push	rsi
-	push	rdx
-	push	rcx
-	push	rbx
-
 	;	division
 
 	mov		rax, rdx
@@ -51,14 +43,6 @@ _copy_8:
 	rep		stosb
 
 _end:
-
-	;	pops
-
-	pop		rbx
-	pop		rcx
-	pop		rdx
-	pop		rsi
-	pop		rdi
 
 	;	return s value
 
