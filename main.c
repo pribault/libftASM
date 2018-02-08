@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 16:20:27 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/07 20:59:06 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/08 10:31:51 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,19 @@ void	test_ft_memset(void)
 	printf("\033[0m\033[1m\n______________\n\n");
 }
 
+void	test_ft_strdup(void)
+{
+	char	*a = "Hello I'm a string";
+	char	*b = NULL;
+
+	printf("\033[0m\033[1m___ft_strdup___\n\n");
+
+	printf("ft_strdup(%s)=%s\n", a, ft_strdup(a));
+	printf("ft_strdup(%s)=%s\n", b, ft_strdup(b));
+
+	printf("\033[0m\033[1m\n______________\n\n");
+}
+
 int		main(int argc, char **argv)
 {
 	if (argc == 1)
@@ -131,6 +144,7 @@ int		main(int argc, char **argv)
 		test_ft_memcpy();
 		test_ft_strcat();
 		test_ft_memset();
+		test_ft_strdup();
 		return (0);
 	}
 	for (int i = 1; i < argc; i++)
@@ -145,6 +159,8 @@ int		main(int argc, char **argv)
 			test_ft_strcat();
 		else if (!strcmp(argv[i], "ft_memset"))
 			test_ft_memset();
+		else if (!strcmp(argv[i], "ft_strdup"))
+			test_ft_strdup();
 		else
 			printf("unknown function %s\n", argv[i]);
 	}

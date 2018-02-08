@@ -14,7 +14,6 @@ _start:
 	push	rsi
 	push	rcx
 	push	rdx
-	push	rax
 
 _div:
 
@@ -46,9 +45,10 @@ _end:
 
 	;	pop all registers
 
-	pop		rax
 	pop		rdx
 	pop		rcx
 	pop		rsi
 	pop		rdi
+
+	mov		rax, rdi
 	ret
