@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 16:16:34 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/08 18:30:12 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/08 20:34:45 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
 char	*ft_strdup(const char *s);
 char	*ft_strcat(char *dest, const char *src);
+int		ft_isalpha(int c);
 
 #endif

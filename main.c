@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 16:20:27 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/08 18:37:13 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/08 21:02:28 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,18 @@ void	test_ft_strcat(void)
 	printf("\033[0m\033[1m\n______________\n\n");
 }
 
+void	test_ft_isalpha(void)
+{
+	printf("\033[0m\033[1m___ft_isalpha___\n\n");
+
+	for (int i = 0; i < 256; i++)
+	{
+		printf("[%c] %d: %d\n", i, i, ft_isalpha(i));
+	}
+
+	printf("\033[0m\033[1m\n______________\n\n");
+}
+
 int		main(int argc, char **argv)
 {
 	if (argc == 1)
@@ -152,6 +164,7 @@ int		main(int argc, char **argv)
 		test_ft_strcat();
 		test_ft_memset();
 		test_ft_strdup();
+		test_ft_isalpha();
 		return (0);
 	}
 	for (int i = 1; i < argc; i++)
@@ -168,6 +181,8 @@ int		main(int argc, char **argv)
 			test_ft_memset();
 		else if (!strcmp(argv[i], "ft_strdup"))
 			test_ft_strdup();
+		else if (!strcmp(argv[i], "ft_isalpha"))
+			test_ft_isalpha();
 		else
 			printf("unknown function %s\n", argv[i]);
 	}
