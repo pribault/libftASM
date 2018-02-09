@@ -6,6 +6,8 @@ global ft_memset
 
 ft_memset:
 
+	push	rdi
+
 	;	division
 
 	mov		rax, rdx
@@ -46,5 +48,5 @@ _end:
 
 	;	return s value
 
-	mov		rax, rdi
+	pop		rax
 	ret

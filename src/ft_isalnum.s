@@ -1,10 +1,10 @@
 section .text
 
-global	ft_isalpha
+global	ft_isalnum
 
-	;	int	ft_isalpha(int c)
+ft_isalnum:
 
-ft_isalpha:
+_ft_isalpha:
 
 _maj_1:
 	cmp		edi, 'A'
@@ -19,12 +19,19 @@ _maj_2:
 _min_1:
 	cmp		edi, 'a'
 	jge		_min_2
-	jmp		_false
+	jmp		_ft_isdigit
 
 _min_2:
 	cmp		edi, 'z'
 	jle		_true
-	jmp		_false
+	jmp		_ft_isdigit
+
+_ft_isdigit:
+
+	cmp		edi, '0'
+	jl		_false
+	cmp		edi, '9'
+	jg		_false
 
 _true:
 	mov		eax, 1
