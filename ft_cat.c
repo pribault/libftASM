@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 20:44:07 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/09 20:53:56 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/09 21:46:56 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int		main(int argc, char **argv)
 			close(fd);
 		return (1);
 	}
+	printf("sizeof(struct stat)=%lu st_size offset=%lu\n",
+	sizeof(struct stat), (void*)&buff.st_size - (void*)&buff);
 	write(1, s, buff.st_size);
 	munmap(s, buff.st_size);
 	close(fd);

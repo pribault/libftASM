@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 16:16:34 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/09 20:17:58 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/09 21:09:13 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,7 @@ int		ft_isprint(int c);
 int		ft_puts(char *s);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
+
+void	ft_cat(int fd);
 
 #endif
