@@ -1,5 +1,6 @@
-%define WRITE	4
-%define STDOUT	1
+%define SYSCALL(x)	0x2000000 | x
+%define WRITE		4
+%define STDOUT		1
 
 section	.data
 
@@ -7,22 +8,23 @@ section	.data
 
 section	.text
 
-global	ft_puts
+global	_ft_puts
 
-extern	ft_strlen
+extern	_ft_strlen
 
-ft_puts:
+_ft_puts:
 
 	mov		rbx, rdi
 
-	call	ft_strlen
+	call	_ft_strlen
 
-	mov		rcx, rbx
+	mov		rsi, rbx
 	mov		rdx, rax
-	mov		rax, WRITE
-	mov		rbx, STDOUT
-	int		0x80
-	mov		rax, WRITE
-	mov		rcx, new_line
+	mov		rax, SYSCALL(WRITE)
+	mov		rdi, STDOUT
+	syscall
+	mov		rax, SYSCALL(WRITE)
+	lea		rsi, [rel new_line]
 	mov		rdx, 1
-	int		0x80
+	syscall
+	ret

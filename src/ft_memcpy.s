@@ -1,10 +1,10 @@
 section .text
 
-global ft_memcpy
+global	_ft_memcpy
 
-;	void	*ft_memcpy(void *dest, const void *src, size_t n);
+	;	void	*ft_memcpy(void *dest, const void *src, size_t n);
 
-ft_memcpy:
+_ft_memcpy:
 
 _start:
 

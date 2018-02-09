@@ -1,10 +1,10 @@
 section .text
 
-global ft_memset
+global	_ft_memset
 
-;	void	*ft_memset(void *s, int c, size_t n);
+	;	void	*ft_memset(void *s, int c, size_t n);
 
-ft_memset:
+_ft_memset:
 
 	push	rdi
 

@@ -1,10 +1,10 @@
 section .text
 
-global	ft_isdigit
+global	_ft_isdigit
 
 	;	int	ft_isdigit(int c)
 
-ft_isdigit:
+_ft_isdigit:
 
 	cmp		edi, '0'
 	jl		_false

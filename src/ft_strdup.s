@@ -1,16 +1,18 @@
 section .text
 
-extern malloc
-extern ft_strlen
-extern ft_memcpy
+extern	_malloc
+extern	_ft_strlen
+extern	_ft_memcpy
 
-global ft_strdup
+global _ft_strdup
 
-;	char	*ft_strdup(const char *s);
+	;	char	*ft_strdup(const char *s);
 
-ft_strdup:
+_ft_strdup:
 
 _start:
+
+	push	rbp
 
 	;	check the string
 
@@ -19,14 +21,13 @@ _start:
 
 	;	get the string len
 
-	mov		rbx, rdi
+	push	rdi
 	
-	call	ft_strlen
+	call	_ft_strlen
 
-	push	rbx
 	mov		rdi, rax
 	push	rdi
-	call	malloc
+	call	_malloc
 
 	;	check malloc return
 
@@ -39,14 +40,15 @@ _start:
 	add		rdx, 1
 	pop		rsi
 	mov		rdi, rax
-	call	ft_memcpy
+	call	_ft_memcpy
 
 _end:
 
+	pop		rbp
 	ret
 
 _end_null:
 
 	mov		rax, 0
-
+	pop		rbp
 	ret

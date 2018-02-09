@@ -2,11 +2,11 @@
 
 section .text
 
-global ft_strlen
+global	_ft_strlen
 
-;	size_t	ft_strlen(const char *s)
+	;	size_t	ft_strlen(const char *s)
 
-ft_strlen:
+_ft_strlen:
 
 	;	check pointer
 

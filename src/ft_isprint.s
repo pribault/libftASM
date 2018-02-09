@@ -1,10 +1,10 @@
 section	.text
 
-global	ft_isprint
+global	_ft_isprint
 
 	;	int		ft_isprint(int c)
 
-ft_isprint:
+_ft_isprint:
 	cmp		edi, 32
 	jl		_false
 	cmp		edi, 126

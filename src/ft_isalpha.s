@@ -1,10 +1,10 @@
 section .text
 
-global	ft_isalpha
+global	_ft_isalpha
 
 	;	int	ft_isalpha(int c)
 
-ft_isalpha:
+_ft_isalpha:
 
 _maj_1:
 	cmp		edi, 'A'

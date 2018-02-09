@@ -1,12 +1,12 @@
 section .text
 
-extern ft_memset
+extern	_ft_memset
 
-global ft_bzero
+global	_ft_bzero
 
 ;	void	ft_bzero(void *s, size_t n)
 
-ft_bzero:
+_ft_bzero:
 
 _init:
 
@@ -15,6 +15,6 @@ _init:
 	mov		rdx, rsi
 	mov		rsi, 0
 
-	call	ft_memset
+	call	_ft_memset
 
 	ret

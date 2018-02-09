@@ -1,13 +1,13 @@
 section .text
 
-extern	ft_strlen
-extern	ft_memcpy
+extern	_ft_strlen
+extern	_ft_memcpy
 
-global	ft_strcat
+global	_ft_strcat
 
 ;	char	*ft_strcat(char *dest, const char *src)
 
-ft_strcat:
+_ft_strcat:
 
 	cmp		rdi, 0
 	je		_end_null
@@ -16,20 +16,20 @@ ft_strcat:
 
 	push	rdi
 
-	call	ft_strlen
+	call	_ft_strlen
 
 	sub		rdi, 1
 	push	rdi
 
 	mov		rdi, rsi
 
-	call	ft_strlen
+	call	_ft_strlen
 
 	mov		rdx, rax
 	add		rdx, 1
 	pop		rdi
 
-	call	ft_memcpy
+	call	_ft_memcpy
 
 _end:
 

@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 16:20:27 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/09 13:50:54 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/09 20:39:36 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,15 @@ void	test_ft_memcpy(void)
 	b[41] = 0x88;
 	b[42] = 0x88;
 	b[43] = 0x88;
-	printf("\033[0m\033[4marray a:\n");
+	printf("\033[0m\033[4marray a:\033[0m\n");
 	memdump(&a, sizeof(a));
-	printf("\033[0m\033[4m\narray b:\n");
+	printf("\033[0m\033[4m\narray b:\033[0m\n");
 	memdump(&b, sizeof(b));
 	ft_memcpy(&a, &b, sizeof(a));
 	printf("\033[0m\nmemcpy !\n\n");
-	printf("\033[0m\033[4marray a:\n");
+	printf("\033[0m\033[4marray a:\033[0m\n");
 	memdump(&a, sizeof(a));
-	printf("\033[0m\033[4m\narray b:\n");
+	printf("\033[0m\033[4m\narray b:\033[0m\n");
 	memdump(&b, sizeof(b));
 
 	printf("\033[0m\033[1m\n______________\n\n");
@@ -105,11 +105,11 @@ void	test_ft_memset(void)
 	printf("\033[0m\033[1m___ft_memset___\n\n");
 
 	memset(&a, 0, sizeof(a));
-	printf("\033[0m\033[4marray a:\n");
+	printf("\033[0m\033[4marray a:\033[0m\n");
 	memdump(&a, sizeof(a));
 	printf("\033[0mft_memset !\n");
 	printf("c=%d s=%p p=%p\n", c, &a, ft_memset(&a, c, sizeof(a)));
-	printf("\033[0m\033[4marray a:\n");
+	printf("\033[0m\033[4marray a:\033[0m\n");
 	memdump(&a, sizeof(a));
 
 	printf("\033[0m\033[1m\n______________\n\n");
@@ -146,16 +146,19 @@ void	test_ft_strcat(void)
 void	test_ft_isalpha(void)
 {
 	unsigned int	isalpha_color = 32;
-	unsigned int	ft_isalpha_color = 46;
+	unsigned int	ft_isalpha_color = 126;
 
 	printf("\033[0m\033[1m___ft_isalpha___\n\n");
 
 	printf("\033[0m\033[38;5;%umisalpha\n", isalpha_color);
 	printf("\033[0m\033[38;5;%umft_isalpha\n\n", ft_isalpha_color);
 
-	for (int i = 0; i < 256; i++)
+	for (int i = 0; i < 128; i++)
+	{
+		printf("\033[0m\033[38;5;%um∎ ", (isalpha(i) == ft_isalpha(i)) ? 46 : 160);
 		printf("\033[0m[\033[38;5;%um. %c\033[0m] %d: \033[38;5;%um%d\033[0m\n",
 		(isalpha(i)) ? isalpha_color : 7, i, i, ft_isalpha(i) ? ft_isalpha_color : 7, ft_isalpha(i));
+	}
 
 	printf("\033[0m\033[1m\n______________\n\n");
 }
@@ -163,16 +166,19 @@ void	test_ft_isalpha(void)
 void	test_ft_isdigit(void)
 {
 	unsigned int	isdigit_color = 32;
-	unsigned int	ft_isdigit_color = 46;
+	unsigned int	ft_isdigit_color = 126;
 
 	printf("\033[0m\033[1m___ft_isdigit___\n\n");
 
 	printf("\033[0m\033[38;5;%umisdigit\n", isdigit_color);
 	printf("\033[0m\033[38;5;%umft_isdigit\n\n", ft_isdigit_color);
 
-	for (int i = 0; i < 256; i++)
+	for (int i = 0; i < 128; i++)
+	{
+		printf("\033[0m\033[38;5;%um∎ ", (isdigit(i) == ft_isdigit(i)) ? 46 : 160);
 		printf("\033[0m[\033[38;5;%um. %c\033[0m] %d: \033[38;5;%um%d\033[0m\n",
 		(isdigit(i)) ? isdigit_color : 7, i, i, ft_isdigit(i) ? ft_isdigit_color : 7, ft_isdigit(i));
+	}
 
 	printf("\033[0m\033[1m\n______________\n\n");
 }
@@ -180,16 +186,19 @@ void	test_ft_isdigit(void)
 void	test_ft_isalnum(void)
 {
 	unsigned int	isalnum_color = 32;
-	unsigned int	ft_isalnum_color = 46;
+	unsigned int	ft_isalnum_color = 126;
 
 	printf("\033[0m\033[1m___ft_isalnum___\n\n");
 
 	printf("\033[0m\033[38;5;%umisalnum\n", isalnum_color);
 	printf("\033[0m\033[38;5;%umft_isalnum\n\n", ft_isalnum_color);
 
-	for (int i = 0; i < 256; i++)
+	for (int i = 0; i < 128; i++)
+	{
+		printf("\033[0m\033[38;5;%um∎ ", (isalnum(i) == ft_isalnum(i)) ? 46 : 160);
 		printf("\033[0m[\033[38;5;%um. %c\033[0m] %d: \033[38;5;%um%d\033[0m\n",
 		(isalnum(i)) ? isalnum_color : 7, i, i, ft_isalnum(i) ? ft_isalnum_color : 7, ft_isalnum(i));
+	}
 
 	printf("\033[0m\033[1m\n______________\n\n");
 }
@@ -197,7 +206,7 @@ void	test_ft_isalnum(void)
 void	test_ft_isascii(void)
 {
 	unsigned int	isascii_color = 32;
-	unsigned int	ft_isascii_color = 46;
+	unsigned int	ft_isascii_color = 126;
 
 	printf("\033[0m\033[1m___ft_isascii___\n\n");
 
@@ -205,8 +214,11 @@ void	test_ft_isascii(void)
 	printf("\033[0m\033[38;5;%umft_isascii\n\n", ft_isascii_color);
 
 	for (int i = 0; i < 256; i++)
+	{
+		printf("\033[0m\033[38;5;%um∎ ", (isascii(i) == ft_isascii(i)) ? 46 : 160);
 		printf("\033[0m[\033[38;5;%um. %c\033[0m] %d: \033[38;5;%um%d\033[0m\n",
 		(isascii(i)) ? isascii_color : 7, i, i, ft_isascii(i) ? ft_isascii_color : 7, ft_isascii(i));
+	}
 
 	printf("\033[0m\033[1m\n______________\n\n");
 }
@@ -214,7 +226,7 @@ void	test_ft_isascii(void)
 void	test_ft_isprint(void)
 {
 	unsigned int	isprint_color = 32;
-	unsigned int	ft_isprint_color = 46;
+	unsigned int	ft_isprint_color = 126;
 
 	printf("\033[0m\033[1m___ft_isprint___\n\n");
 
@@ -222,8 +234,11 @@ void	test_ft_isprint(void)
 	printf("\033[0m\033[38;5;%umft_isprint\n\n", ft_isprint_color);
 
 	for (int i = 0; i < 256; i++)
+	{
+		printf("\033[0m\033[38;5;%um∎ ", (isprint(i) == ft_isprint(i)) ? 46 : 160);
 		printf("\033[0m[\033[38;5;%um. %c\033[0m] %d: \033[38;5;%um%d\033[0m\n",
 		(isprint(i)) ? isprint_color : 7, i, i, ft_isprint(i) ? ft_isprint_color : 7, ft_isprint(i));
+	}
 
 	printf("\033[0m\033[1m\n______________\n\n");
 }
@@ -236,6 +251,46 @@ void	test_ft_puts(void)
 
 	printf("ft_puts(%s):\n", s);
 	ft_puts(s);
+
+	printf("\033[0m\033[1m\n______________\n\n");
+}
+
+void	test_ft_toupper(void)
+{
+	unsigned int	toupper_color = 32;
+	unsigned int	ft_toupper_color = 126;
+
+	printf("\033[0m\033[1m___ft_toupper___\n\n");
+
+	printf("\033[0m\033[38;5;%umtoupper\n", toupper_color);
+	printf("\033[0m\033[38;5;%umft_toupper\n\n", ft_toupper_color);
+
+	for (int i = 0; i < 128; i++)
+	{
+		printf("\033[0m\033[38;5;%um∎ ", (toupper(i) == ft_toupper(i)) ? 46 : 160);
+		printf("\033[0m\033[38;5;%um%c\033[0m->\033[0m\033[38;5;%um%c\033[0m | \033[0m\033[38;5;%um%c\033[0m->\033[0m\033[38;5;%um%c\033[0m\n",
+		toupper_color, i, toupper_color, toupper(i), ft_toupper_color, i, ft_toupper_color, ft_toupper(i));
+	}
+
+	printf("\033[0m\033[1m\n______________\n\n");
+}
+
+void	test_ft_tolower(void)
+{
+	unsigned int	tolower_color = 32;
+	unsigned int	ft_tolower_color = 126;
+
+	printf("\033[0m\033[1m___ft_tolower___\n\n");
+
+	printf("\033[0m\033[38;5;%umtolower\n", tolower_color);
+	printf("\033[0m\033[38;5;%umft_tolower\n\n", ft_tolower_color);
+
+	for (int i = 0; i < 128; i++)
+	{
+		printf("\033[0m\033[38;5;%um∎ ", (tolower(i) == ft_tolower(i)) ? 46 : 160);
+		printf("\033[0m\033[38;5;%um%c\033[0m->\033[0m\033[38;5;%um%c\033[0m | \033[0m\033[38;5;%um%c\033[0m->\033[0m\033[38;5;%um%c\033[0m\n",
+		tolower_color, i, tolower_color, tolower(i), ft_tolower_color, i, ft_tolower_color, ft_tolower(i));
+	}
 
 	printf("\033[0m\033[1m\n______________\n\n");
 }
@@ -255,6 +310,8 @@ int		main(int argc, char **argv)
 		test_ft_isalnum();
 		test_ft_isascii();
 		test_ft_isprint();
+		test_ft_toupper();
+		test_ft_tolower();
 		test_ft_puts();
 		return (0);
 	}
@@ -282,6 +339,12 @@ int		main(int argc, char **argv)
 			test_ft_isascii();
 		else if (!strcmp(argv[i], "ft_isprint"))
 			test_ft_isprint();
+		else if (!strcmp(argv[i], "ft_toupper"))
+			test_ft_toupper();
+		else if (!strcmp(argv[i], "ft_tolower"))
+			test_ft_tolower();
+		else if (!strcmp(argv[i], "ft_puts"))
+			test_ft_puts();
 		else
 			printf("unknown function %s\n", argv[i]);
 	}

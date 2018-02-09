@@ -1,10 +1,10 @@
 section	.text
 
-global	ft_isascii
+global	_ft_isascii
 
 	;	int		ft_isascii(int c);
 
-ft_isascii:
+_ft_isascii:
 	cmp		edi, 128
 	jl		_true
 
