@@ -18,7 +18,7 @@ FORMAT = macho64
 
 .PHONY: all clean fclean re
 
-all: $(NAME) $(NAME_TEST)
+all: $(NAME) $(NAME_TEST) ft_cat
 
 $(OBJ_DIR):
 	mkdir $@
@@ -32,10 +32,14 @@ $(NAME_TEST): main.c $(NAME)
 $(NAME): $(OBJ)
 	ar rc $@ $(OBJ)
 
+ft_cat: ft_cat.c $(NAME)
+	gcc -I include -o $@ $< -L . -lft
+
 clean:
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -rf $(NAME) $(NAME_TEST)
+	rm -rf ft_cat
 
 re: fclean all

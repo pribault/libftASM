@@ -6,34 +6,20 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 20:44:07 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/09 21:46:56 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/10 15:55:15 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
-#include <unistd.h>
+#include "libft_asm.h"
 
 int		main(int argc, char **argv)
 {
-	struct stat	buff;
-	void		*s;
-	int			fd;
+	int	fd;
 
-	fd = -1;
-	if (argc != 2 || (fd = open(argv[1], O_RDONLY)) == -1 ||
-		fstat(fd, &buff) == -1 || !(s = mmap(NULL, buff.st_size,
-		PROT_READ, MAP_FILE | MAP_PRIVATE, fd, 0)))
-	{
-		if (fd != -1)
-			close(fd);
+	if (argc != 2)
 		return (1);
-	}
-	printf("sizeof(struct stat)=%lu st_size offset=%lu\n",
-	sizeof(struct stat), (void*)&buff.st_size - (void*)&buff);
-	write(1, s, buff.st_size);
-	munmap(s, buff.st_size);
-	close(fd);
+	if ((fd = open(argv[1], O_RDONLY)) != -1)
+		ft_cat(fd);
 	return (0);
 }

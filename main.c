@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 16:20:27 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/09 20:39:36 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/10 15:50:37 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,22 @@
 #include <sys/mman.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <fcntl.h>
+#include <unistd.h>
 
-void	test(long a)
+void	ft_memdump(void *ptr, size_t size)
 {
-	printf("receiving %ld\n", a);
-}
+	size_t	i;
 
-void	memdump(void *ptr, size_t size)
-{
-	static unsigned char	min = 238;
-	static unsigned char	max = 255;
-	unsigned char			c;
-
-	printf("\033[0m");
-	for (size_t i = 0; i < size; i++)
+	if (!ptr)
+		return ;
+	i = 0;
+	while (i < size)
 	{
-		c = *(unsigned char*)(ptr + i);
-		printf("\033[38;5;%um%.2hhx ", min + (c / (max - min)), c);
+		printf((i) ? " %.2hhx" : "%.2hhx", ((char*)ptr)[i]);
+		i++;
 	}
-	printf("\n");
+	putchar('\n');
 }
 
 void	test_ft_bzero(void)
@@ -46,10 +43,10 @@ void	test_ft_bzero(void)
 
 	printf("\033[0mhere is a big array of size %lu:\n", sizeof(a));
 	memset(&a, 42, sizeof(a));
-	memdump(&a, sizeof(a));
+	ft_memdump(&a, sizeof(a));
 	ft_bzero(&a, sizeof(a));
 	printf("\033[0m\nbzero !\n");
-	memdump(&a, sizeof(a));
+	ft_memdump(&a, sizeof(a));
 
 	printf("\033[0m\033[1m\n______________\n\n");
 }
@@ -84,15 +81,15 @@ void	test_ft_memcpy(void)
 	b[42] = 0x88;
 	b[43] = 0x88;
 	printf("\033[0m\033[4marray a:\033[0m\n");
-	memdump(&a, sizeof(a));
+	ft_memdump(&a, sizeof(a));
 	printf("\033[0m\033[4m\narray b:\033[0m\n");
-	memdump(&b, sizeof(b));
+	ft_memdump(&b, sizeof(b));
 	ft_memcpy(&a, &b, sizeof(a));
 	printf("\033[0m\nmemcpy !\n\n");
 	printf("\033[0m\033[4marray a:\033[0m\n");
-	memdump(&a, sizeof(a));
+	ft_memdump(&a, sizeof(a));
 	printf("\033[0m\033[4m\narray b:\033[0m\n");
-	memdump(&b, sizeof(b));
+	ft_memdump(&b, sizeof(b));
 
 	printf("\033[0m\033[1m\n______________\n\n");
 }
@@ -106,11 +103,11 @@ void	test_ft_memset(void)
 
 	memset(&a, 0, sizeof(a));
 	printf("\033[0m\033[4marray a:\033[0m\n");
-	memdump(&a, sizeof(a));
+	ft_memdump(&a, sizeof(a));
 	printf("\033[0mft_memset !\n");
 	printf("c=%d s=%p p=%p\n", c, &a, ft_memset(&a, c, sizeof(a)));
 	printf("\033[0m\033[4marray a:\033[0m\n");
-	memdump(&a, sizeof(a));
+	ft_memdump(&a, sizeof(a));
 
 	printf("\033[0m\033[1m\n______________\n\n");
 }
@@ -295,6 +292,38 @@ void	test_ft_tolower(void)
 	printf("\033[0m\033[1m\n______________\n\n");
 }
 
+void	test_ft_cat(void)
+{
+	static char	*files[] =
+	{
+		"Makefile",
+		"auteur",
+		"/dev/null",
+		NULL
+	};
+	int			fd;
+	int			i;
+	void		*ptr;
+
+	printf("\033[0m\033[1m___ft_cat___\033[0m\n\n");
+
+	i = -1;
+	while (files[++i])
+	{
+		if ((fd = open(files[i], O_RDONLY)) != -1)
+		{
+			printf("\033[4mft_cat on \"%s\":\033[0m\n", files[i]);
+			ft_cat(fd);
+			close(fd);
+			printf("\n");
+		}
+		else
+			printf("test program cannot open \"%s\"\n", files[i]);
+	}
+
+	printf("\033[0m\033[1m\n______________\n\n");
+}
+
 int		main(int argc, char **argv)
 {
 	if (argc == 1)
@@ -313,6 +342,7 @@ int		main(int argc, char **argv)
 		test_ft_toupper();
 		test_ft_tolower();
 		test_ft_puts();
+		test_ft_cat();
 		return (0);
 	}
 	for (int i = 1; i < argc; i++)
@@ -345,6 +375,8 @@ int		main(int argc, char **argv)
 			test_ft_tolower();
 		else if (!strcmp(argv[i], "ft_puts"))
 			test_ft_puts();
+		else if (!strcmp(argv[i], "ft_cat"))
+			test_ft_cat();
 		else
 			printf("unknown function %s\n", argv[i]);
 	}
