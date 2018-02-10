@@ -8,7 +8,7 @@ _ft_memcpy:
 
 _start:
 
-	mov		rbx, rdi
+	push	rdi
 
 _div:
 
@@ -38,5 +38,5 @@ _copy_8:
 
 _end:
 
-	mov		rax, rbx
+	pop		rax
 	ret

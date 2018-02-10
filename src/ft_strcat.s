@@ -9,11 +9,6 @@ global	_ft_strcat
 
 _ft_strcat:
 
-	cmp		rdi, 0
-	je		_end_null
-	cmp		rsi, 0
-	je		_end_null
-
 	push	rdi
 
 	call	_ft_strlen

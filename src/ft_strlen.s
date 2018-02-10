@@ -8,11 +8,6 @@ global	_ft_strlen
 
 _ft_strlen:
 
-	;	check pointer
-
-	cmp		rdi, 0
-	je		_null
-
 	;	assignations
 
 	mov		rcx, UINT64_MAX

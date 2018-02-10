@@ -5,6 +5,8 @@ global	_ft_isascii
 	;	int		ft_isascii(int c);
 
 _ft_isascii:
+	cmp		edi, 0
+	jl		_false
 	cmp		edi, 128
 	jl		_true
 
