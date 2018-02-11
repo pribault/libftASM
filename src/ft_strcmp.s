@@ -1,46 +1,48 @@
 ; **************************************************************************** ;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    ft_strlen.s                                        :+:      :+:    :+:    ;
+;    ft_strcmp.s                                        :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
-;    Created: 2018/02/10 21:17:22 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/11 16:35:25 by pribault         ###   ########.fr        ;
+;    Created: 2018/02/11 16:26:24 by pribault          #+#    #+#              ;
+;    Updated: 2018/02/11 16:35:20 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
-%define UINT64_MAX	0xffffffffffffffff
+section	.text
 
-section .text
+extern	_ft_strlen
+extern	_ft_memcmp
 
-global	_ft_strlen
+global	_ft_strcmp
 
-	;	size_t	ft_strlen(const char *s)
+	;	int	ft_strcmp(const char *s1, const char *s2)
 
-_ft_strlen:
+_ft_strcmp:
 
-	;	assignations
+	call	_ft_strlen
+	mov		rdx, rax
 
-	mov		rcx, UINT64_MAX
-	mov		al, 0
+	;	xor swap
 
-	;	iterate
+	xor		rdi, rsi
+	xor		rsi, rdi
+	xor		rdi, rsi
 
-	cld
-	repne	scasb
+	call	_ft_strlen
 
-	;	compute final value
+	cmp		rax, rdx
+	jle		_compare
+	mov		rdx, rax
 
-	mov		rax, rcx
-	not		rax
-	dec		rax
+_compare:
 
-	ret
+	inc		rdx
 
-_null:
+	xor		rdi, rsi
+	xor		rsi, rdi
+	xor		rdi, rsi
 
-	;	if null return 0
-
-	mov	rax, 0
+	call	_ft_memcmp
 	ret

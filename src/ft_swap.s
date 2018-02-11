@@ -1,54 +1,61 @@
 ; **************************************************************************** ;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    ft_memcpy.s                                        :+:      :+:    :+:    ;
+;    ft_swap.s                                          :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
-;    Created: 2018/02/10 19:24:43 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/11 16:35:12 by pribault         ###   ########.fr        ;
+;    Created: 2018/02/11 16:34:41 by pribault          #+#    #+#              ;
+;    Updated: 2018/02/11 19:37:34 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
-section .text
+section	.text
 
-global	_ft_memcpy
+global	_ft_swap
 
-	;	void	*ft_memcpy(void *dest, const void *src, size_t n);
+	;	void	ft_swap(void *a, void *b, size_t n)
 
-_ft_memcpy:
-
-_start:
-
-	push	rdi
-
-_div:
-
-	;	divide n by 8 to get quotient and reminder:
+_ft_swap:
 	
-	;	the quotient is the number of packets of 8 bytes
-	;	and is used to copy faster.
-
 	mov		rax, rdx
 	mov		rdx, 0
 	mov		rcx, 8
 	div		cx
 
-_copy_64:
+_swap_64:
 
-	;	copy by 8 bytes
+	cmp		rax, 0
+	je		_swap_8
 
-	mov		rcx, rax
-	rep		movsq
+	mov		rcx, qword [rdi]
+	xor		rcx, qword [rsi]
+	xor		qword [rsi], rcx
+	xor		rcx, qword [rsi]
+	mov		qword [rdi], rcx
 
-_copy_8:
+	add		rdi, 8
+	add		rsi, 8
+	dec		rax
 
-	;	copy the last bytes (max 7 so don't need to optimize anymore)
+	jmp		_swap_64
 
-	mov		rcx, rdx
-	rep		movsb
+_swap_8:
+
+	cmp		rdx, 0
+	je		_end
+
+	mov		cl, byte [rdi]
+	xor		cl, byte [rsi]
+	xor		byte [rsi], cl
+	xor		cl, byte [rsi]
+	mov		byte [rdi], cl
+
+	inc		rdi
+	inc		rsi
+	dec		rdx
+	jmp		_swap_8
 
 _end:
 
-	pop		rax
 	ret

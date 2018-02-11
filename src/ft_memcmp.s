@@ -1,46 +1,49 @@
 ; **************************************************************************** ;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    ft_strlen.s                                        :+:      :+:    :+:    ;
+;    ft_memcmp.s                                        :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
-;    Created: 2018/02/10 21:17:22 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/11 16:35:25 by pribault         ###   ########.fr        ;
+;    Created: 2018/02/11 16:12:42 by pribault          #+#    #+#              ;
+;    Updated: 2018/02/11 20:37:28 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
-%define UINT64_MAX	0xffffffffffffffff
+section	.text
 
-section .text
+global	_ft_memcmp
 
-global	_ft_strlen
+	;	int	memcmp(const void *s1, const void *s2, size_t n)
 
-	;	size_t	ft_strlen(const char *s)
+_ft_memcmp:
 
-_ft_strlen:
+	mov		rax, rdx
+	mov		rdx, 0
+	mov		rcx, 8
+	div		cx
+	cmp		rax, 0
+	je		_cmp_8
 
-	;	assignations
+_cmp_64:
 
-	mov		rcx, UINT64_MAX
-	mov		al, 0
+	mov		rcx, rax
+	repe	cmpsq
+	sub		rdi, 8
+	sub		rsi, 8
+	add		rdx, 8
 
-	;	iterate
+_cmp_8:
 
-	cld
-	repne	scasb
+	mov		rcx, rdx
+	rep		cmpsb
+	dec		rdi
+	dec		rsi
 
-	;	compute final value
-
-	mov		rax, rcx
-	not		rax
-	dec		rax
-
-	ret
-
-_null:
-
-	;	if null return 0
-
+_end:
 	mov	rax, 0
+	mov	al, byte [rdi]
+	mov	rbx, 0
+	mov	bl, byte [rsi]
+	sub	rax, rbx
 	ret
