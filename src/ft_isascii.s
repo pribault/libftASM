@@ -6,17 +6,17 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 20:34:24 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/11 16:34:56 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/12 12:29:16 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section	.text
 
-global	_ft_isascii
+global	ft_isascii
 
 	;	int		ft_isascii(int c);
 
-_ft_isascii:
+ft_isascii:
 	cmp		edi, 0
 	jl		_false
 	cmp		edi, 128

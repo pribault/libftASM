@@ -6,21 +6,21 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 21:17:36 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/11 16:35:23 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/12 12:31:03 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section .text
 
-extern	_malloc
-extern	_ft_strlen
-extern	_ft_memcpy
+extern	malloc
+extern	ft_strlen
+extern	ft_memcpy
 
-global _ft_strdup
+global ft_strdup
 
 	;	char	*ft_strdup(const char *s);
 
-_ft_strdup:
+ft_strdup:
 
 _start:
 
@@ -30,12 +30,12 @@ _start:
 
 	push	rdi
 	
-	call	_ft_strlen
+	call	ft_strlen
 
 	mov		rdi, rax
 	inc		rdi
 	push	rdi
-	call	_malloc
+	call	malloc
 
 	;	check malloc return
 
@@ -47,7 +47,7 @@ _start:
 	pop		rdx
 	pop		rsi
 	mov		rdi, rax
-	call	_ft_memcpy
+	call	ft_memcpy
 
 _end:
 

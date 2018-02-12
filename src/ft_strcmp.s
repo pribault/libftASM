@@ -6,22 +6,22 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/11 16:26:24 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/11 16:35:20 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/12 12:30:15 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section	.text
 
-extern	_ft_strlen
-extern	_ft_memcmp
+extern	ft_strlen
+extern	ft_memcmp
 
-global	_ft_strcmp
+global	ft_strcmp
 
 	;	int	ft_strcmp(const char *s1, const char *s2)
 
-_ft_strcmp:
+ft_strcmp:
 
-	call	_ft_strlen
+	call	ft_strlen
 	mov		rdx, rax
 
 	;	xor swap
@@ -30,7 +30,7 @@ _ft_strcmp:
 	xor		rsi, rdi
 	xor		rdi, rsi
 
-	call	_ft_strlen
+	call	ft_strlen
 
 	cmp		rax, rdx
 	jle		_compare
@@ -44,5 +44,5 @@ _compare:
 	xor		rsi, rdi
 	xor		rdi, rsi
 
-	call	_ft_memcmp
+	call	ft_memcmp
 	ret

@@ -6,7 +6,7 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 21:17:22 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/11 16:35:25 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/12 13:15:31 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -14,11 +14,11 @@
 
 section .text
 
-global	_ft_strlen
+global	ft_strlen
 
 	;	size_t	ft_strlen(const char *s)
 
-_ft_strlen:
+ft_strlen:
 
 	;	assignations
 
@@ -32,15 +32,7 @@ _ft_strlen:
 
 	;	compute final value
 
-	mov		rax, rcx
-	not		rax
-	dec		rax
+	mov		rax, UINT64_MAX
+	sub		rax, rcx
 
-	ret
-
-_null:
-
-	;	if null return 0
-
-	mov	rax, 0
 	ret

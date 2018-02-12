@@ -6,19 +6,19 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 16:07:46 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/11 16:34:45 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/12 12:28:53 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section .text
 
-extern	_ft_memset
+extern	ft_memset
 
-global	_ft_bzero
+global	ft_bzero
 
 ;	void	ft_bzero(void *s, size_t n)
 
-_ft_bzero:
+ft_bzero:
 
 _init:
 
@@ -27,6 +27,6 @@ _init:
 	mov		rdx, rsi
 	mov		rsi, 0
 
-	call	_ft_memset
+	call	ft_memset
 
 	ret

@@ -6,17 +6,17 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 20:38:39 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/11 16:35:14 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/12 12:29:57 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section .text
 
-global	_ft_memset
+global	ft_memset
 
 	;	void	*ft_memset(void *s, int c, size_t n);
 
-_ft_memset:
+ft_memset:
 
 	push	rdi
 

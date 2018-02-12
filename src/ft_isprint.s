@@ -6,17 +6,17 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 16:07:46 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/11 16:35:02 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/12 12:29:37 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section	.text
 
-global	_ft_isprint
+global	ft_isprint
 
 	;	int		ft_isprint(int c)
 
-_ft_isprint:
+ft_isprint:
 	cmp		edi, 32
 	jl		_false
 	cmp		edi, 126

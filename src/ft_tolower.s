@@ -6,15 +6,15 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/11 11:56:57 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/11 16:35:34 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/12 12:30:33 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section	.text
 
-global	_ft_tolower
+global	ft_tolower
 
-_ft_tolower:
+ft_tolower:
 	cmp		edi, 'A'
 	jl		_false
 	cmp		edi, 'Z'

@@ -15,7 +15,7 @@ SRC =	ft_bzero.s ft_strcat.s\
 		ft_cat.s ft_strcmp.s\
 		ft_memcmp.s ft_swap.s
 OBJ = $(SRC:%.s=$(OBJ_DIR)/%.o)
-FORMAT = macho64
+FORMAT = elf64
 
 .PHONY: all clean fclean re
 
@@ -28,7 +28,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.s $(INCLUDE_DIR)/$(INCLUDE) | $(OBJ_DIR)
 	$(CC) -f $(FORMAT) -o $@ $<
 
 $(NAME_TEST): main.c $(NAME)
-	gcc -I $(INCLUDE_DIR) -o $@ $< -L . -lft
+	clang -I $(INCLUDE_DIR) -o $@ $< -L . -lft
 
 $(NAME): $(OBJ)
 	ar rc $@ $(OBJ)

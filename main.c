@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 16:07:55 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/11 20:33:57 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/12 13:03:17 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 #include <fcntl.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <inttypes.h>
 
 #define SPEED		1
 
 #define BUFFER_SIZE	4096
-#define ARRAY_SIZE	127
+#define ARRAY_SIZE	8192
 #define STR_SAD		"Hello I'm a string ;("
 #define STR1		"Hello I'm a string :D"
 #define STR2		"Hello I'm "
@@ -32,14 +33,14 @@ int		null = -1;
 
 static void	ft_old_swap_2(void *a, void *b, size_t size, size_t i)
 {
-	while (i + 1 < size)
+	if (i + 1 < size)
 	{
 		*(uint16_t*)(a + i) ^= *(uint16_t*)(b + i);
 		*(uint16_t*)(b + i) ^= *(uint16_t*)(a + i);
 		*(uint16_t*)(a + i) ^= *(uint16_t*)(b + i);
 		i += 2;
 	}
-	while (i < size)
+	if (i < size)
 	{
 		*(uint8_t*)(a + i) ^= *(uint8_t*)(b + i);
 		*(uint8_t*)(b + i) ^= *(uint8_t*)(a + i);
@@ -62,7 +63,7 @@ void		ft_old_swap(void *a, void *b, size_t size)
 		*(uint64_t*)(a + i) ^= *(uint64_t*)(b + i);
 		i += 8;
 	}
-	while (i + 3 < size)
+	if (i + 3 < size)
 	{
 		*(uint32_t*)(a + i) ^= *(uint32_t*)(b + i);
 		*(uint32_t*)(b + i) ^= *(uint32_t*)(a + i);
