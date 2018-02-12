@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 16:07:55 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/12 13:03:17 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/12 22:18:44 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <inttypes.h>
+#include <string.h>
 
 #define SPEED		1
 

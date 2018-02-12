@@ -6,7 +6,7 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/11 16:26:24 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/12 12:30:15 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/12 22:16:42 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -21,28 +21,25 @@ global	ft_strcmp
 
 ft_strcmp:
 
-	call	ft_strlen
-	mov		rdx, rax
-
-	;	xor swap
-
-	xor		rdi, rsi
-	xor		rsi, rdi
-	xor		rdi, rsi
-
-	call	ft_strlen
-
-	cmp		rax, rdx
-	jle		_compare
-	mov		rdx, rax
+	mov		rcx, 0
+	mov		rax, 0
 
 _compare:
 
-	inc		rdx
+	mov		al, byte [rdi]
+	cmp		al, 0
+	je		_end
+	cmp		byte [rsi], 0
+	je		_end
+	cmp		al, byte [rsi]
+	je		_end
+	inc		rdi
+	inc		rsi
+	jmp		_compare
 
-	xor		rdi, rsi
-	xor		rsi, rdi
-	xor		rdi, rsi
+_end:
 
-	call	ft_memcmp
+	mov		rdi, 0
+	mov		dl, byte [rsi]
+	sub		rax, rdi
 	ret
