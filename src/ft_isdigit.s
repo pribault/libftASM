@@ -6,7 +6,7 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 16:07:46 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/14 12:44:47 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/14 13:20:13 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -24,9 +24,11 @@ ft_isdigit:
 	jg		_false
 
 _true:
+
 	mov		eax, 2048
 	ret
 
 _false:
+
 	mov		eax, 0
 	ret
