@@ -6,7 +6,7 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 21:17:22 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/12 13:15:31 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/13 16:34:33 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -34,5 +34,6 @@ ft_strlen:
 
 	mov		rax, UINT64_MAX
 	sub		rax, rcx
+	dec		rax
 
 	ret

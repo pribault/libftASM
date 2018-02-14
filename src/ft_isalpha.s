@@ -6,7 +6,7 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 16:07:46 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/12 12:29:10 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/14 12:40:57 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -39,7 +39,7 @@ _min_2:
 	jmp		_false
 
 _true:
-	mov		eax, 1
+	mov		eax, 1024
 	ret
 
 _false:
