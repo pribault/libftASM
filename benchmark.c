@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 11:00:23 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/13 16:13:09 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/15 13:10:35 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -381,10 +381,33 @@ static void		test_function(t_test *to_test, size_t seconds)
 		count[2]);
 }
 
-void			benchmark(void)
+void			benchmark(char **args, int n)
 {
-	for (size_t i = 0; g_test[i].name; i++)
+	size_t	i, j;
+	int		found;
+
+	if (n)
 	{
-		test_function(&g_test[i], SPEED);
+		for (j = 0; j < n; j++)
+		{
+			found = 0;
+			for (i = 0; g_test[i].name; i++)
+			{
+				if (!strcmp(args[j], g_test[i].name) ||
+					(!strncmp(args[j], "ft_", 3) &&
+					!strcmp(&args[j][3], g_test[i].name)))
+				{
+					found = 1;
+					test_function(&g_test[i], SPEED);
+				}
+			}
+			if (!found)
+				dprintf(1, "no benchmark for %s\n", args[j]);
+		}
 	}
+	else
+		for (i = 0; g_test[i].name; i++)
+		{
+			test_function(&g_test[i], SPEED);
+		}
 }

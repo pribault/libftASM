@@ -10,7 +10,11 @@ SRC =	ft_bzero.s ft_strcat.s\
 		ft_memset.s ft_strdup.s\
 		ft_isalpha.s ft_isdigit.s\
 		ft_isalnum.s ft_isascii.s\
-		ft_isprint.s ft_whatis.s\
+		ft_isprint.s ft_isblank.s\
+		ft_iscntrl.s ft_isgraph.s\
+		ft_islower.s ft_isupper.s\
+		ft_isspace.s ft_isxdigit.s\
+		ft_whatis.s\
 		ft_toupper.s ft_tolower.s\
 		ft_cat.s ft_strcmp.s\
 		ft_memcmp.s ft_swap.s\

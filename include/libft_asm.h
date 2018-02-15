@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 16:16:34 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/14 13:19:23 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:47:15 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,16 @@
 # define BYTE(x)	(1 << x)
 
 # define ISASCII	BYTE(0)
+# define ISCNTRL	BYTE(1)
 # define ISALNUM	BYTE(3)
+# define ISUPPER	BYTE(8)
+# define ISLOWER	BYTE(9)
 # define ISALPHA	BYTE(10)
 # define ISDIGIT	BYTE(11)
+# define ISXDIGIT	BYTE(12)
+# define ISSPACE	BYTE(13)
 # define ISPRINT	BYTE(14)
+# define ISGRAPH	BYTE(15)
 
 /*
 ******************
@@ -55,6 +61,12 @@ int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_isblank(int c);
+int		ft_iscntrl(int c);
+int		ft_isgraph(int c);
+int		ft_islower(int c);
+int		ft_isupper(int c);
+int		ft_isspace(int c);
+int		ft_isxdigit(int c);
 int		ft_whatis(int c);
 
 int		ft_puts(char *s);
