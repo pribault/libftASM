@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 11:00:23 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/15 13:10:35 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/16 16:40:08 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include <stdlib.h>
 #include <inttypes.h>
 #include <string.h>
+
+#define BENCHMARK_MAX	128
 
 #define SPEED		1
 
@@ -322,7 +324,7 @@ static t_test	g_test[] =
 	{"cat", &test_ft_cat_1, &test_cat_1},
 	{"memcmp", &test_ft_memcmp_1, &test_memcmp_1},
 	{"strcmp", &test_ft_strcmp_1, &test_strcmp_1},
-	{"swap", &test_ft_swap_1, &test_old_swap_1},
+	// {"swap", &test_ft_swap_1, &test_old_swap_1},
 	{NULL, NULL}
 };
 
@@ -349,10 +351,16 @@ static size_t	test_loop(t_func func, size_t seconds)
 	return (count);
 }
 
-static void		test_function(t_test *to_test, size_t seconds)
+static uint8_t	colors[] = {
+	196, 202, 208, 214, 220,
+	226, 190, 154, 118, 82,
+	46, 47, 48, 49, 50,
+	51, 45, 39, 33, 27, 21
+};
+static size_t	max = 200;
+
+static size_t	test_function(t_test *to_test, size_t seconds)
 {
-	static size_t	max = 200;
-	static uint8_t	colors[] = {196, 202, 208, 214, 226, 154, 118, 82, 46};
 	static uint8_t	title = 39;
 	char	buff[BUFFER_SIZE];
 	size_t	count[3];
@@ -379,10 +387,13 @@ static void		test_function(t_test *to_test, size_t seconds)
 	else
 		printf("\n_____\033[1m\033[4m\033[38;5;10m%lu%%\033[0m_____\n\n",
 		count[2]);
+	return (count[2]);
 }
 
 void			benchmark(char **args, int n)
 {
+	size_t	values[BENCHMARK_MAX];
+	size_t	count = 0;
 	size_t	i, j;
 	int		found;
 
@@ -398,7 +409,7 @@ void			benchmark(char **args, int n)
 					!strcmp(&args[j][3], g_test[i].name)))
 				{
 					found = 1;
-					test_function(&g_test[i], SPEED);
+					values[count++] = test_function(&g_test[i], SPEED);
 				}
 			}
 			if (!found)
@@ -408,6 +419,11 @@ void			benchmark(char **args, int n)
 	else
 		for (i = 0; g_test[i].name; i++)
 		{
-			test_function(&g_test[i], SPEED);
+			values[count++] = test_function(&g_test[i], SPEED);
 		}
+	for (size_t idx = 1; idx < count; idx++)
+		values[0] += values[idx];
+	values[0] /= count;
+	dprintf(1, "\n  \033[1m\033[38;5;244m◅\033[0m  \033[1maverage \033[38;5;%hhum%lu%%\033[0m  \033[1m\033[38;5;244m▻\n\n",
+	colors[(values[0] * (sizeof(colors) - 1)) / max], values[0]);
 }
