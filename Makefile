@@ -21,33 +21,45 @@ SRC =	ft_bzero.s ft_strcat.s\
 		ft_puts.s\
 		ft_vector_init.s ft_vector_del.s\
 		ft_vector_add.s ft_vector_get.s
-OBJ = $(SRC:%.s=$(OBJ_DIR)/%.o)
-FORMAT = elf64
+TEST_SRC =	main.c benchmark.c test.c
+OBJ =	$(SRC:%.s=$(OBJ_DIR)/%.o)
+FORMAT =	elf64
+JOBS =	4
+PREFIX =	\033[0m\033[1m\033[38;5;237m[\033[38;5;239ml\033[38;5;241mi\033[38;5;243mb\033[38;5;245mf\033[38;5;247mt\033[38;5;249mA\033[38;5;251mS\033[38;5;253mM\033[38;5;255m]\033[0m 
 
 .PHONY: all clean fclean re
 
-all: $(NAME) $(NAME_TEST) ft_cat
+all:
+	@make $(NAME) -j$(JOBS)
+	@make $(NAME_TEST) -j$(JOBS)
+	@make ft_cat -j$(JOBS)
 
 $(OBJ_DIR):
-	mkdir $@
+	@mkdir $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.s $(INCLUDE_DIR)/$(INCLUDE) | $(OBJ_DIR)
-	$(CC) -f $(FORMAT) -o $@ $<
+	@$(CC) -f $(FORMAT) -o $@ $<
+	@echo "$(PREFIX)\033[38;5;81m$(@:$(OBJ_DIR)/%.o=%.c) compiled"
 
-$(NAME_TEST): main.c benchmark.c test.c $(NAME)
-	clang -I $(INCLUDE_DIR) -o $@ main.c benchmark.c test.c -L . -lft
+$(NAME_TEST): $(TEST_SRC) $(NAME)
+	@clang -I $(INCLUDE_DIR) -o $@ $(TEST_SRC) -L . -lft
+	@echo "$(PREFIX)\033[38;5;221m$@ compiled"
 
 $(NAME): $(OBJ)
-	ar rc $@ $(OBJ)
+	@ar rc $@ $(OBJ)
+	@echo "$(PREFIX)\033[38;5;208m$@ compiled"
 
 ft_cat: ft_cat.c $(NAME)
-	gcc -I include -o $@ $< -L . -lft
+	@gcc -I include -o $@ $< -L . -lft
+	@echo "$(PREFIX)\033[38;5;221m$@ compiled"
 
 clean:
-	rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
+	@echo "$(PREFIX)\033[38;5;77mobject files removed"
 
 fclean: clean
-	rm -rf $(NAME) $(NAME_TEST)
-	rm -rf ft_cat
+	@rm -rf $(NAME) $(NAME_TEST)
+	@rm -rf ft_cat
+	@echo "$(PREFIX)\033[38;5;77m$(NAME), $(NAME_TEST) and ft_cat removed"
 
 re: fclean all
