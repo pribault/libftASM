@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 11:13:17 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/15 13:23:08 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/16 16:02:04 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static int	test_ft_memcmp_1(void)
 
 	memset(&a, 42, ARRAY_SIZE);
 	memset(&b, 42, ARRAY_SIZE);
+	a[5] = 41;
 	reta = ft_memcmp(&a, &b, ARRAY_SIZE);
 	retb = memcmp(&a, &b, ARRAY_SIZE);
 	dprintf(1, "ft_memcmp: %d\nmemcmp: %d\n", reta, retb);
@@ -90,6 +91,8 @@ static int	test_ft_memcmp_rand(void)
 	}
 	reta = ft_memcmp(&a, &b, ARRAY_SIZE);
 	retb = memcmp(&a, &b, ARRAY_SIZE);
+	memdump(&a, ARRAY_SIZE);
+	memdump(&b, ARRAY_SIZE);
 	dprintf(1, "ft_memcmp: %d\nmemcmp: %d\n", reta, retb);
 	return ((reta != retb) ? 1 : 0);
 }
@@ -464,17 +467,31 @@ static int	test_ft_isxdigit(void)
 	return (ret);
 }
 
-# define ISASCII	BYTE(0)
-# define ISCNTRL	BYTE(1)
-# define ISALNUM	BYTE(3)
-# define ISUPPER	BYTE(8)
-# define ISLOWER	BYTE(9)
-# define ISALPHA	BYTE(10)
-# define ISDIGIT	BYTE(11)
-# define ISXDIGIT	BYTE(12)
-# define ISSPACE	BYTE(13)
-# define ISPRINT	BYTE(14)
-# define ISGRAPH	BYTE(15)
+static int	test_ft_strcmp_1(void)
+{
+	char	*s1 = STR1;
+	char	*s2 = STR1;
+	int		reta;
+	int		retb;
+
+	reta = ft_strcmp(s1, s2);
+	retb = strcmp(s1, s2);
+	dprintf(1, "s1=%s\ns2=%s\nft_strcmp: %d\nstrcmp: %d\n", s1, s2, reta, retb);
+	return ((reta != retb) ? 1 : 0);
+}
+
+static int	test_ft_strcmp_2(void)
+{
+	char	*s1 = STR1;
+	char	*s2 = STR_SAD;
+	int		reta;
+	int		retb;
+
+	reta = ft_strcmp(s1, s2);
+	retb = strcmp(s1, s2);
+	dprintf(1, "s1=%s\ns2=%s\nft_strcmp: %d\nstrcmp: %d\n", s1, s2, reta, retb);
+	return ((reta != retb) ? 1 : 0);
+}
 
 static int	test_ft_whatis(void)
 {
@@ -546,6 +563,8 @@ static t_test	g_test[] =
 	{"isupper", &test_ft_isupper, 1},
 	{"isspace", &test_ft_isspace, 1},
 	{"isxdigit", &test_ft_isxdigit, 1},
+	{"strcmp", &test_ft_strcmp_1, 1},
+	{"strcmp", &test_ft_strcmp_2, 1},
 	{"whatis", &test_ft_whatis, 0},
 	{NULL, NULL}
 };
@@ -553,31 +572,30 @@ static t_test	g_test[] =
 void		test(char **args, int n)
 {
 	static char	buffer[BUFFER_SIZE];
-	size_t		i, j;
+	size_t		i, j, count;
 	int			fd[2];
 	int			ret;
-	int			found;
 
 	if (n)
 	{
 		for (j = 0; j < n; j++)
 		{
-			found = 0;
+			count = 0;
 			for (i = 0; g_test[i].name; i++)
 			{
 				if (!strcmp(args[j], g_test[i].name) ||
 					(!strncmp(args[j], "ft_", 3) &&
 					!strcmp(&args[j][3], g_test[i].name)))
 				{
-					found = 1;
+					count++;
 					pipe(fd);
 					dup2(fd[1], 1);
 					if ((ret = g_test[i].func()) == 1)
 					{
 						close(fd[1]);
 						dup2(out, 1);
-						dprintf(out, "_____\033[38;5;196merror on ft_%s\033[0m_____\n\n",
-						g_test[i].name);
+						dprintf(out, "_____\033[38;5;196merror on ft_%s %lu\033[0m_____\n\n",
+						g_test[i].name, count);
 						while ((ret = read(fd[0], &buffer, BUFFER_SIZE)) > 0)
 							write(out, &buffer, ret);
 						dprintf(out, "\n");
@@ -586,8 +604,8 @@ void		test(char **args, int n)
 					{
 						close(fd[1]);
 						dup2(out, 1);
-						dprintf(out, "_____\033[38;5;226mft_%s debug\033[0m_____\n\n",
-						g_test[i].name);
+						dprintf(out, "_____\033[38;5;226mft_%s %lu debug\033[0m_____\n\n",
+						g_test[i].name, count);
 						while ((ret = read(fd[0], &buffer, BUFFER_SIZE)) > 0)
 							write(out, &buffer, ret);
 						dprintf(out, "\n");
@@ -596,15 +614,15 @@ void		test(char **args, int n)
 					{
 						close(fd[1]);
 						dup2(out, 1);
-						dprintf(out, "_____\033[38;5;46mft_%s OK\033[0m_____\n\n",
-						g_test[i].name);
+						dprintf(out, "_____\033[38;5;46mft_%s %lu OK\033[0m_____\n\n",
+						g_test[i].name, count);
 						while ((ret = read(fd[0], &buffer, BUFFER_SIZE)) > 0)
 							write(null, &buffer, ret);
 					}
 					close(fd[0]);
 				}
 			}
-			if (!found)
+			if (!count)
 				dprintf(out, "no test for %s\n", args[j]);
 		}
 	}

@@ -6,7 +6,7 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/11 16:26:24 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/12 22:16:42 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/16 15:58:54 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -21,25 +21,31 @@ global	ft_strcmp
 
 ft_strcmp:
 
-	mov		rcx, 0
 	mov		rax, 0
+	mov		rcx, 0
 
 _compare:
 
 	mov		al, byte [rdi]
 	cmp		al, 0
+	je		_end_a
+
+	mov		cl, byte [rsi]
+	cmp		cl, 0
 	je		_end
-	cmp		byte [rsi], 0
-	je		_end
-	cmp		al, byte [rsi]
-	je		_end
+
+	cmp		al, cl
+	jne		_end
+
 	inc		rdi
 	inc		rsi
 	jmp		_compare
 
+_end_a:
+
+	mov		cl, byte [rsi]
+
 _end:
 
-	mov		rdi, 0
-	mov		dl, byte [rsi]
-	sub		rax, rdi
+	sub		eax, ecx
 	ret
