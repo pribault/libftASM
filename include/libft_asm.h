@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 16:16:34 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/15 12:47:15 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/16 16:48:33 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,30 @@
 # define ISPRINT	BYTE(14)
 # define ISGRAPH	BYTE(15)
 
+# define DEFAULT_VECTOR	(t_vector){0, 0, 0, NULL}
+
+/*
+*************
+**	types  **
+*************
+*/
+
+typedef struct	s_vector
+{
+	size_t		type;
+	size_t		n;
+	size_t		size;
+	void		*ptr;
+}				t_vector;
+
 /*
 ******************
 **	prototypes  **
 ******************
+*/
+
+/*
+**	standard library
 */
 
 void	ft_bzero(void *s, size_t n);
@@ -67,7 +87,6 @@ int		ft_islower(int c);
 int		ft_isupper(int c);
 int		ft_isspace(int c);
 int		ft_isxdigit(int c);
-int		ft_whatis(int c);
 
 int		ft_puts(char *s);
 int		ft_toupper(int c);
@@ -75,10 +94,14 @@ int		ft_tolower(int c);
 
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
-void	ft_swap(void *a, void *b, size_t n);
+
+/*
+**	others
+*/
 
 void	ft_cat(int fd);
 
-void	ft_memdump(void *ptr, size_t size);
+int		ft_whatis(int c);
+void	ft_swap(void *a, void *b, size_t n);
 
 #endif

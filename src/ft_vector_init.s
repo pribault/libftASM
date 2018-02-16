@@ -1,6 +1,3 @@
-%define SYSCALL(x)		x
-%define MUNMAP			11
-
 %define VECTOR_TYPE		0
 %define VECTOR_N		8
 %define VECTOR_SIZE		16
@@ -16,27 +13,17 @@
 
 section	.text
 
-global	ft_vector_del
+global	ft_vector_init
 
-	;	void	ft_vector_del(t_vector *vector)
+	;	void	ft_vector_init(t_vector *vector, size_t type)
 
-ft_vector_del:
+ft_vector_init:
 
-	cmp		qword [rdi + VECTOR_SIZE], 0
-	je		_clean
-
-	push	rdi
-
-	mov		rsi, [rdi + VECTOR_SIZE]
-	mov		rdi, [rdi + VECTOR_PTR]
-	mov		rax, SYSCALL(MUNMAP)
-	syscall
-
-	pop		rdi
-
-_clean:
-
+	mov		[rdi + VECTOR_TYPE], rsi
 	mov		qword [rdi + VECTOR_N], 0
 	mov		qword [rdi + VECTOR_SIZE], 0
 	mov		qword [rdi + VECTOR_PTR], 0
+
+_end:
+
 	ret

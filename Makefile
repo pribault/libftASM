@@ -19,7 +19,7 @@ SRC =	ft_bzero.s ft_strcat.s\
 		ft_cat.s ft_strcmp.s\
 		ft_memcmp.s ft_swap.s\
 		ft_puts.s\
-		ft_vector_new.s ft_vector_del.s\
+		ft_vector_init.s ft_vector_del.s\
 		ft_vector_add.s ft_vector_get.s
 OBJ = $(SRC:%.s=$(OBJ_DIR)/%.o)
 FORMAT = elf64
