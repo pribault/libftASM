@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 11:13:17 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/16 16:02:04 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/17 12:52:26 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,14 +181,16 @@ static int	test_ft_strdup_1(void)
 {
 	char	*a;
 	char	*b;
+	int		ret;
 
 	a = ft_strdup(STR1);
 	dprintf(1, "ft_strdup:\n%s\n", a);
 	b = strdup(STR1);
 	dprintf(1, "strdup:\n%s\n", b);
+	ret = (strcmp(a, b)) ? 1 : 0;
 	free(a);
 	free(b);
-	return ((strcmp(a, b)) ? 1 : 0);
+	return (ret);
 }
 
 static int	test_ft_strlen_1(void)
@@ -493,40 +495,6 @@ static int	test_ft_strcmp_2(void)
 	return ((reta != retb) ? 1 : 0);
 }
 
-static int	test_ft_whatis(void)
-{
-	int	ret;
-
-	for (int i = MIN; i <= MAX; i++)
-	{
-		ret = ft_whatis(i);
-		dprintf(1, (isprint(i)) ? "[%c] is:\n" : "[%d] is:\n", i);
-		if (ret & ISASCII)
-			dprintf(1, " - ascii\n");
-		if (ret & ISCNTRL)
-			dprintf(1, " - control\n");
-		if (ret & ISALNUM)
-			dprintf(1, " - alnum\n");
-		if (ret & ISUPPER)
-			dprintf(1, " - upper\n");
-		if (ret & ISLOWER)
-			dprintf(1, " - lower\n");
-		if (ret & ISALPHA)
-			dprintf(1, " - alpha\n");
-		if (ret & ISDIGIT)
-			dprintf(1, " - digit\n");
-		if (ret & ISXDIGIT)
-			dprintf(1, " - xdigit\n");
-		if (ret & ISSPACE)
-			dprintf(1, " - space\n");
-		if (ret & ISPRINT)
-			dprintf(1, " - printable\n");
-		if (ret & ISGRAPH)
-			dprintf(1, " - graph\n");
-	}
-	return (2);
-}
-
 typedef int		(*t_func)(void);
 
 typedef struct	s_test
@@ -565,7 +533,6 @@ static t_test	g_test[] =
 	{"isxdigit", &test_ft_isxdigit, 1},
 	{"strcmp", &test_ft_strcmp_1, 1},
 	{"strcmp", &test_ft_strcmp_2, 1},
-	{"whatis", &test_ft_whatis, 0},
 	{NULL, NULL}
 };
 

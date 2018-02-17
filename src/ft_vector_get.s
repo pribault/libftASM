@@ -13,11 +13,11 @@
 
 section	.text
 
-global	ft_vector_get
+global	_ft_vector_get
 
 	;	void	*ft_vector_get(t_vector *vector, size_t n)
 
-ft_vector_get:
+_ft_vector_get:
 
 	mov		rax, rsi
 	imul	rax, [rdi + VECTOR_TYPE]

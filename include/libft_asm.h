@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 16:16:34 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/16 16:48:33 by pribault         ###   ########.fr       */
+/*   Updated: 2018/02/17 12:52:11 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,6 @@
 **	defines  **
 ***************
 */
-
-# define BYTE(x)	(1 << x)
-
-# define ISASCII	BYTE(0)
-# define ISCNTRL	BYTE(1)
-# define ISALNUM	BYTE(3)
-# define ISUPPER	BYTE(8)
-# define ISLOWER	BYTE(9)
-# define ISALPHA	BYTE(10)
-# define ISDIGIT	BYTE(11)
-# define ISXDIGIT	BYTE(12)
-# define ISSPACE	BYTE(13)
-# define ISPRINT	BYTE(14)
-# define ISGRAPH	BYTE(15)
 
 # define DEFAULT_VECTOR	(t_vector){0, 0, 0, NULL}
 
@@ -101,7 +87,6 @@ int		ft_strcmp(const char *s1, const char *s2);
 
 void	ft_cat(int fd);
 
-int		ft_whatis(int c);
 void	ft_swap(void *a, void *b, size_t n);
 
 #endif

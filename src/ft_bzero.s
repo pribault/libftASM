@@ -6,7 +6,7 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 16:07:46 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/14 08:50:39 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/17 12:37:53 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -14,11 +14,11 @@ section .text
 
 extern	ft_memset
 
-global	ft_bzero
+global	_ft_bzero
 
 ;	void	ft_bzero(void *s, size_t n)
 
-ft_bzero:
+_ft_bzero:
 
 	;	division
 

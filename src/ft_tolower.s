@@ -6,17 +6,17 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/11 11:56:57 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/13 17:15:48 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/17 12:40:27 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section	.text
 
-global	ft_tolower
+global	_ft_tolower
 
 	;	int		ft_toupper(int c)
 
-ft_tolower:
+_ft_tolower:
 
 	cmp		rdi, 'A'
 	jl		_false

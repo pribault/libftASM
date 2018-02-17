@@ -6,17 +6,17 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 16:07:46 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/14 13:20:13 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/17 12:49:54 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section .text
 
-global	ft_isdigit
+global	_ft_isdigit
 
 	;	int	ft_isdigit(int c)
 
-ft_isdigit:
+_ft_isdigit:
 
 	cmp		edi, '0'
 	jl		_false
@@ -25,7 +25,7 @@ ft_isdigit:
 
 _true:
 
-	mov		eax, 2048
+	mov		eax, 1
 	ret
 
 _false:

@@ -6,17 +6,17 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/12 19:41:43 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/16 15:48:36 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/17 12:54:10 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section	.text
 
-global	ft_memcmp
+global	_ft_memcmp
 
 	;	int	memcmp(const void *s1, const void *s2, size_t n)
 
-ft_memcmp:
+_ft_memcmp:
 
 	mov		rax, rdx
 	mov		rdx, 0
@@ -29,44 +29,14 @@ _cmp_64:
 
 	repe	cmpsq
 
-	jne		_cmp_16_init
-	jmp		_cmp_16
+	jne		_cmp_8_init
+	jmp		_cmp_8
 
-_cmp_16_init:
+_cmp_8_init:
 
 	add		rdx, 8
 	sub		rdi, 8
 	sub		rsi, 8
-
-_cmp_16:
-
-	cmp		rdx, 1
-	jle		_cmp_8
-
-	cmpsw
-	jne		_found_word
-
-	sub		rdx, 2
-
-	jmp		_cmp_16
-
-_found_word:
-
-	mov		rax, 0
-	mov		rcx, 0
-	mov		ax, [rdi - 2]
-	mov		cx, [rsi - 2]
-	cmp		al, cl
-	jne		_found_byte
-	sub		rax, rcx
-	ret
-
-_found_byte:
-
-	mov		ah, 0
-	mov		ch, 0
-	sub		eax, ecx
-	ret
 
 _cmp_8:
 

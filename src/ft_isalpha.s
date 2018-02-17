@@ -6,17 +6,17 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 16:07:46 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/14 13:19:46 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/17 12:49:44 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section .text
 
-global	ft_isalpha
+global	_ft_isalpha
 
 	;	int	ft_isalpha(int c)
 
-ft_isalpha:
+_ft_isalpha:
 
 _maj_1:
 
@@ -44,7 +44,7 @@ _min_2:
 
 _true:
 
-	mov		eax, 1024
+	mov		eax, 1
 	ret
 
 _false:

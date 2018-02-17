@@ -13,11 +13,11 @@
 
 section	.text
 
-global	ft_vector_init
+global	_ft_vector_init
 
 	;	void	ft_vector_init(t_vector *vector, size_t type)
 
-ft_vector_init:
+_ft_vector_init:
 
 	mov		[rdi + VECTOR_TYPE], rsi
 	mov		qword [rdi + VECTOR_N], 0

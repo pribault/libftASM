@@ -6,17 +6,17 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/14 13:17:45 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/15 12:42:27 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/17 12:50:12 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section	.text
 
-global	ft_isxdigit
+global	_ft_isxdigit
 
 	;	int		ft_isxdigit(int c)
 
-ft_isxdigit:
+_ft_isxdigit:
 
 	cmp		edi, '0'
 	jl		_false
@@ -35,7 +35,7 @@ ft_isxdigit:
 
 _true:
 
-	mov		eax, 4096
+	mov		eax, 1
 	ret
 
 _false:

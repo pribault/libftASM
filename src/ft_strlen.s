@@ -6,7 +6,7 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 21:17:22 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/13 16:34:33 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/17 12:40:17 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -14,11 +14,11 @@
 
 section .text
 
-global	ft_strlen
+global	_ft_strlen
 
 	;	size_t	ft_strlen(const char *s)
 
-ft_strlen:
+_ft_strlen:
 
 	;	assignations
 

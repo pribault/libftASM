@@ -6,13 +6,14 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 16:07:46 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/12 12:39:23 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/17 12:47:31 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
-%define SYSCALL(x)	x
-%define WRITE		1
-%define STDOUT		1
+%define SYSCALL(x)		0x2000000 | x
+
+%define WRITE			4
+%define STDOUT			1
 
 section	.data
 
@@ -20,15 +21,15 @@ section	.data
 
 section	.text
 
-global	ft_puts
+global	_ft_puts
 
-extern	ft_strlen
+extern	_ft_strlen
 
-ft_puts:
+_ft_puts:
 
 	mov		rbx, rdi
 
-	call	ft_strlen
+	call	_ft_strlen
 
 	mov		rsi, rbx
 	mov		rdx, rax

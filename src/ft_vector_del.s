@@ -1,5 +1,5 @@
-%define SYSCALL(x)		x
-%define MUNMAP			11
+%define SYSCALL(x)		0x2000000 | x
+%define MUNMAP			73
 
 %define VECTOR_TYPE		0
 %define VECTOR_N		8
@@ -16,11 +16,11 @@
 
 section	.text
 
-global	ft_vector_del
+global	_ft_vector_del
 
 	;	void	ft_vector_del(t_vector *vector)
 
-ft_vector_del:
+_ft_vector_del:
 
 	cmp		qword [rdi + VECTOR_SIZE], 0
 	je		_clean

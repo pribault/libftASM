@@ -1,6 +1,5 @@
-%define SYSCALL(x)		x
-%define MMAP			9
-%define MREMAP			25
+%define SYSCALL(x)		0x2000000 | x
+%define MMAP			197
 
 %define PROT
 
@@ -20,11 +19,11 @@
 
 section	.text
 
-global	ft_vector_add
+global	_ft_vector_add
 
 	;	int		ft_vector_add(t_vector *vector, void *ptr)
 
-ft_vector_add:
+_ft_vector_add:
 
 	mov		rax, [rdi + VECTOR_N]
 	inc		rax

@@ -6,17 +6,17 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/11 16:34:41 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/12 12:30:29 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/17 12:40:22 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section	.text
 
-global	ft_swap
+global	_ft_swap
 
 	;	void	ft_swap(void *a, void *b, size_t n)
 
-ft_swap:
+_ft_swap:
 	
 	mov		rax, rdx
 	mov		rdx, 0

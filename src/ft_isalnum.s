@@ -6,17 +6,17 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 16:07:46 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/14 13:20:02 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/17 12:49:41 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section .text
 
-global	ft_isalnum
+global	_ft_isalnum
 
-ft_isalnum:
+_ft_isalnum:
 
-ft_isalpha:
+_ft_isalpha:
 
 _maj_1:
 
@@ -34,15 +34,15 @@ _min_1:
 
 	cmp		edi, 'a'
 	jge		_min_2
-	jmp		ft_isdigit
+	jmp		_ft_isdigit
 
 _min_2:
 
 	cmp		edi, 'z'
 	jle		_true
-	jmp		ft_isdigit
+	jmp		_ft_isdigit
 
-ft_isdigit:
+_ft_isdigit:
 
 	cmp		edi, '0'
 	jl		_false
@@ -51,7 +51,7 @@ ft_isdigit:
 
 _true:
 
-	mov		eax, 8
+	mov		eax, 1
 	ret
 
 _false:

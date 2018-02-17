@@ -6,17 +6,17 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/14 13:17:31 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/15 12:33:02 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/17 12:50:06 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
 section	.text
 
-global	ft_isspace
+global	_ft_isspace
 
 	;	int		ft_isspace(int c)
 
-ft_isspace:
+_ft_isspace:
 
 	cmp		edi, 9
 	jl		_false
@@ -27,7 +27,7 @@ ft_isspace:
 
 _true:
 
-	mov		eax, 8192
+	mov		eax, 1
 	ret
 
 _false:

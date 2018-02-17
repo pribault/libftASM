@@ -6,92 +6,78 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 16:07:46 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/12 12:38:15 by pribault         ###   ########.fr        ;
+;    Updated: 2018/02/17 13:22:26 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
-%define STRUCT_STAT_SIZE	144
-%define SIZE_OFFSET			96
+%define SYSCALL(x)		0x2000000 | x
 
-%define SYSCALL(x)			x
+%define BUFF_SIZE		8192
 
-%define WRITE				1
-%define FSTAT				5
-%define MMAP				9
-%define MUNMAP				11
+%define READ			3
+%define WRITE			4
 
-%define PROT				0x01
-%define MAP					0x0002
-
-%define STDOUT				1
+%define STDOUT			1
 
 section	.text
 
-extern	mmap
+extern	_ft_bzero
+extern	_mmap
 
-extern	ft_bzero
+global	_ft_cat
 
-global	ft_cat
+	;	ssize_t		read(int fildes, void *buf, size_t nbyte);
 
-	;	int		fstat(int fildes, struct stat *buf);
+	;	ssize_t		write(int fildes, const void *buf, size_t nbyte);
 
-	;	void	*mmap(void *addr, size_t len, int prot, int flags, int fd, off_t offset);
+	;	void		ft_cat(int fd);
 
-	;	ssize_t	write(int fildes, const void *buf, size_t nbyte);
-
-	;	void	ft_cat(int fd);
-
-ft_cat:
-
-	;	allocate sizeof(struct stat) on stack
+_ft_cat:
 
 	push	rbp
 	mov		rbp, rsp
-	sub		rsp, STRUCT_STAT_SIZE
 
-	;	call fstat
+	;	allocate buffer
+
+	sub		rsp, BUFF_SIZE
+
+	;	set buffer as seconds parameter
 
 	mov		rsi, rsp
-	mov		rax, SYSCALL(FSTAT)
+
+_read:
+
+	;	read
+
+	mov		rdx, BUFF_SIZE
+	mov		rax, SYSCALL(READ)
 	syscall
 
-	;	check ftstat return
-
-	cmp		rax, -1
-	je		_end
-
-	;	call mmap
-
-	mov		r8, rdi
-	mov		rdi, 0
-	mov		rsi, qword [rsp + SIZE_OFFSET]
-	mov		rdx, PROT
-	mov		rcx, MAP
-	mov		r9, 0
-	mov		rax, SYSCALL(MMAP)
-	call	mmap
-
-	;	check mmap return
+	;	if read reach end of file or encounter an error go to _end
 
 	cmp		rax, 0
 	je		_end
+	cmp		rax, -1
+	je		_end
 
-	;	write to stdout
+_write:
+
+	;	write
+
+	push	rdi
 
 	mov		rdi, STDOUT
-	mov		rsi, rax
-	mov		rdx, qword [rsp + SIZE_OFFSET]
+	mov		rdx, rax
 	mov		rax, SYSCALL(WRITE)
 	syscall
 
-	;	munmap
+	pop		rdi
 
-	mov		rdi, rsi
-	mov		rsi, qword [rsp + SIZE_OFFSET]
-	mov		rax, SYSCALL(MUNMAP)
-	syscall
+	jmp		_read
+
 
 _end:
+
 	mov		rsp, rbp
 	pop		rbp
 	ret
