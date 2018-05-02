@@ -19,7 +19,7 @@ SRC =	ft_bzero.s ft_strcat.s\
 		ft_memcmp.s ft_swap.s\
 		ft_puts.s
 TEST_SRC =	main.c benchmark.c test.c
-OBJ =	$(SRC:%.s=$(OBJ_DIR)/%.o)
+OBJ =	$(sort $(SRC:%.s=$(OBJ_DIR)/%.o))
 FORMAT =	macho64
 JOBS =	4
 PREFIX =	\033[0m\033[1m\033[38;5;237m[\033[38;5;239ml\033[38;5;241mi\033[38;5;243mb\033[38;5;245mf\033[38;5;247mt\033[38;5;249mA\033[38;5;251mS\033[38;5;253mM\033[38;5;255m]\033[0m 
