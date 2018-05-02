@@ -6,7 +6,7 @@
 ;    By: pribault <pribault@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/02/10 20:38:39 by pribault          #+#    #+#              ;
-;    Updated: 2018/02/17 12:39:16 by pribault         ###   ########.fr        ;
+;    Updated: 2018/05/02 18:11:46 by pribault         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -36,17 +36,17 @@ _copy_64:
 
 	mov		rcx, rsi
 	mov		ch, cl
-	mov		bx, cx
-	sal		ebx, 16
-	add		bx, cx
-	mov		ecx, ebx
-	sal		rbx, 32
-	add		rbx, rcx
+	mov		si, cx
+	sal		esi, 16
+	add		si, cx
+	mov		ecx, esi
+	sal		rsi, 32
+	add		rsi, rcx
 
 	;	iterate by packets of 8 bytes
 
 	mov		rcx, rax
-	mov		rax, rbx
+	mov		rax, rsi
 	rep		stosq
 
 _copy_8:
