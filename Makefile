@@ -17,9 +17,7 @@ SRC =	ft_bzero.s ft_strcat.s\
 		ft_toupper.s ft_tolower.s\
 		ft_cat.s ft_strcmp.s\
 		ft_memcmp.s ft_swap.s\
-		ft_puts.s\
-		ft_vector_init.s ft_vector_del.s\
-		ft_vector_add.s ft_vector_get.s
+		ft_puts.s
 TEST_SRC =	main.c benchmark.c test.c
 OBJ =	$(SRC:%.s=$(OBJ_DIR)/%.o)
 FORMAT =	macho64

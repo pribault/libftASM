@@ -6,7 +6,7 @@
 /*   By: pribault <pribault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 16:16:34 by pribault          #+#    #+#             */
-/*   Updated: 2018/02/17 12:52:11 by pribault         ###   ########.fr       */
+/*   Updated: 2018/05/02 18:22:13 by pribault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,6 @@
 */
 
 # include <strings.h>
-
-/*
-***************
-**	defines  **
-***************
-*/
-
-# define DEFAULT_VECTOR	(t_vector){0, 0, 0, NULL}
-
-/*
-*************
-**	types  **
-*************
-*/
-
-typedef struct	s_vector
-{
-	size_t		type;
-	size_t		n;
-	size_t		size;
-	void		*ptr;
-}				t_vector;
 
 /*
 ******************
